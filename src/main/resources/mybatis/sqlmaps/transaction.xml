@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.transaction">
+	<select id="getTransactionDateList" resultType="com.spring.transaction.model.TransactionDate">
+		SELECT
+			time_seq AS timeSeq,
+			open_date AS openDate
+		FROM transaction_date;
+	</select>
+</mapper>
