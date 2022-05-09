@@ -14,20 +14,38 @@
 </head>
 <body>
 <div class="container">
+    <h3>Transactional CQRS</h3>
     <div id="board" class="bg-secondary">
         <c:forEach var="boardInfo" items="${masterBoardDateList}" begin="0" end="${fn:length(masterBoardDateList)}" step = "1" varStatus="status">
-                <p class = "commentPara">timeSeq : ${boardInfo.timeSeq}</p>
-                <p class = "commentPara">openDate : ${boardInfo.openDate}</p>
+            <p>timeSeq : ${boardInfo.timeSeq}</p>
+            <p>openDate : ${boardInfo.openDate}</p>
                 <br>
         </c:forEach>
     </div>
     <div id="board" class="bg-info">
     	<c:forEach var="boardInfo" items="${boardDateList}" begin="0" end="${fn:length(boardDateList)}" step = "1" varStatus="status">
-            <p class = "commentPara">timeSeq : ${boardInfo.timeSeq}</p>
-            <p class = "commentPara">openDate: ${boardInfo.openDate}</p>
+            <p>timeSeq : ${boardInfo.timeSeq}</p>
+            <p>openDate: ${boardInfo.openDate}</p>
             <br>
         </c:forEach>
     </div>
+    <br>
+
+    <h3>AOP CQRS</h3>
+    <div id="board" class="bg-secondary">
+            <c:forEach var="boardInfo" items="${aopMasterBoardDateList}" begin="0" end="${fn:length(aopMasterBoardDateList)}" step = "1" varStatus="status">
+                    <p>timeSeq : ${boardInfo.timeSeq}</p>
+                    <p>openDate : ${boardInfo.openDate}</p>
+                    <br>
+            </c:forEach>
+        </div>
+        <div id="board" class="bg-info">
+        	<c:forEach var="boardInfo" items="${aopBoardDateList}" begin="0" end="${fn:length(aopBoardDateList)}" step = "1" varStatus="status">
+                <p>timeSeq : ${boardInfo.timeSeq}</p>
+                <p>openDate: ${boardInfo.openDate}</p>
+                <br>
+            </c:forEach>
+        </div>
 </div>
 </body>
 </html>

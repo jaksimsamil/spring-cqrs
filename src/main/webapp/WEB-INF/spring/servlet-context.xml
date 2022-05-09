@@ -4,17 +4,32 @@
 			 xmlns:beans="http://www.springframework.org/schema/beans"
 			 xmlns:context="http://www.springframework.org/schema/context"
 			 xmlns:tx="http://www.springframework.org/schema/tx"
+			 xmlns:aop="http://www.springframework.org/schema/aop"
 			 xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<!-- https://shxrecord.tistory.com/213 aop 참고 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+
+	<aop:config>
+		<aop:pointcut id="requiredTx" expression="execution(* com.spring.transaction.dao.BoardAopDao.*(..))"/>
+		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="requiredTx" />
+	</aop:config>
+
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+			<tx:method name="*select*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
 
 	<annotation-driven/>
 	<!-- @Transactional 어노테이션 활성화 -->
